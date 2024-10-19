@@ -11,6 +11,8 @@
 }
 .space{margin-left: 200px;}
 body{
+    display: flex;
+    flex: row;
  background-image: url(bg2.jpg);
 }
 h2{
