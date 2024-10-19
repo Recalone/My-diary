@@ -7,13 +7,19 @@
     height: 540px;
     padding-left: 47px;
     padding-top: 40px;
-    margin-left: 100px;
 }
-.space{margin-left: 200px;}
+main {
+    display: flex;
+    flex-direction: row; /* Stack the divs vertically */
+    align-items: center;
+    gap: 80px; /* Add gap between the two divs */
+}
 body{
     display: flex;
     flex: row;
  background-image: url(bg2.jpg);
+ justify-content: center;
+ align-items: center;
 }
 h2{
     margin-left: 160px;
