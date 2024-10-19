@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memory</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #4a4a4a;
+        }
+
+        .date {
+            text-align: center;
+            font-size: 1.2em;
+            color: #6b6b6b;
+            margin-bottom: 20px;
+        }
+
+        input[type="date"], input[type="text"] {
+            width: 100%;
+            font-size: 16px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        textarea {
+            width: 100%;
+            height: 200px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+            resize: none;
+            outline: none;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #4caf50;
+            color: white;
+            font-size: 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .entry {
+            background-color: #e7f7e6;
+            padding: 15px;
+            border-left: 4px solid #4caf50;
+            margin-top: 20px;
+        }
+
+        .all-entries {
+            margin-top: 30px;
+        }
+
+        .all-entries h2 {
+            text-align: center;
+            color: #4a4a4a;
+        }
+
+        .all-entries p {
+            padding: 10px;
+            background-color: #e7f7e6;
+            border-left: 4px solid #4caf50;
+            margin-bottom: 10px;
+            cursor: pointer;
+        }
+
+        .all-entries p:hover {
+            background-color: #d7f5d4;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Search Diary Entries</h1>
+        <p class="date">Enter a date to search for your diary entry:</p>
+        
+        <input type="date" id="entry-date" max="" />
+        <button id="search-button">Search Entry</button>
+
+        <div id="entry-output" class="entry" style="display: none;">
+            <h2>Diary Entry for <span id="search-date"></span>:</h2>
+            <p id="diary-entry"></p>
+        </div>
+
+        <input type="text" id="entry-title" placeholder="Enter entry title" style="display: none;" />
+        <textarea id="new-entry" placeholder="No entry found. Write a new entry here..."></textarea>
+        <button id="save-new-entry" style="display: none;">Save New Entry</button>
+    </div>
+
+    <div class="all-entries">
+        <h2>All Entries</h2>
+        <div id="all-entries-container"></div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const searchButton = document.getElementById('search-button');
+            const entryDateInput = document.getElementById('entry-date');
+            const entryOutput = document.getElementById('entry-output');
+            const newEntryTextarea = document.getElementById('new-entry');
+            const saveNewEntryButton = document.getElementById('save-new-entry');
+            const searchDateSpan = document.getElementById('search-date');
+            const diaryEntryParagraph = document.getElementById('diary-entry');
+            const entryTitleInput = document.getElementById('entry-title');
+            const allEntriesContainer = document.getElementById('all-entries-container');
+
+            const today = new Date().toISOString().split('T')[0];
+            entryDateInput.setAttribute('max', today);
+
+            searchButton.addEventListener('click', function () {
+                const searchDate = entryDateInput.value;
+                if (!searchDate) {
+                    alert('Please enter a valid date.');
+                    return;
+                }
+
+                const entries = JSON.parse(localStorage.getItem('diaryEntries')) || {};
+
+                if (entries[searchDate]) {
+                    entryOutput.style.display = 'block';
+                    newEntryTextarea.style.display = 'none';
+                    entryTitleInput.style.display = 'none';
+                    saveNewEntryButton.style.display = 'none';
+                    searchDateSpan.textContent = new Date(searchDate).toLocaleDateString();
+                    diaryEntryParagraph.textContent = entries[searchDate].content;
+                } else {
+                    entryOutput.style.display = 'none';
+                    newEntryTextarea.style.display = 'block';
+                    entryTitleInput.style.display = 'block';
+                    saveNewEntryButton.style.display = 'block';
+                }
+            });
+
+            saveNewEntryButton.addEventListener('click', function () {
+                const newEntry = newEntryTextarea.value.trim();
+                const entryTitle = entryTitleInput.value.trim();
+                const searchDate = entryDateInput.value;
+
+                if (newEntry && entryTitle) {
+                    const entries = JSON.parse(localStorage.getItem('diaryEntries')) || {};
+                    entries[searchDate] = { title: entryTitle, content: newEntry };
+                    localStorage.setItem('diaryEntries', JSON.stringify(entries));
+                    alert('New entry saved successfully!');
+                    window.location.reload();
+                } else {
+                    alert('Please enter both a title and your diary entry.');
+                }
+            });
+
+            // Display all entry with there titles only
+            const entries = JSON.parse(localStorage.getItem('diaryEntries')) || {};
+            for (const date in entries) {
+                const entryElement = document.createElement('p');
+                entryElement.textContent = `${new Date(date).toLocaleDateString()}: ${entries[date].title}`;
+                entryElement.addEventListener('click', function () {
+                    alert(`Title: ${entries[date].title}\nContent: ${entries[date].content}`);
+                });
+                allEntriesContainer.appendChild(entryElement);
+            }
+        });
+    </script>
+
+</body>
+</html>

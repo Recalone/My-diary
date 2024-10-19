@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Today's Diary Entry</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url(bg.png);
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #4a4a4a;
+        }
+
+        .date {
+            text-align: center;
+            font-size: 1.2em;
+            color: #6b6b6b;
+            margin-bottom: 20px;
+        }
+
+        textarea {
+            width: 100%;
+            height: 200px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+            resize: none;
+            outline: none;
+            margin-bottom: 20px;
+        }
+
+        button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #4caf50;
+            color: white;
+            font-size: 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>What's Happening Today?</h1>
+        <p class="date">Today's Date: <span id="today-date"></span></p>
+        
+        <textarea id="thoughts" placeholder="Write your thoughts or happenings here..."></textarea>
+
+        <button id="save-button">Save Entry</button>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const todayDateElement = document.getElementById('today-date');
+            const today = new Date();
+            const formattedDate = today.toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+            todayDateElement.textContent = formattedDate;
+
+            const saveButton = document.getElementById('save-button');
+            const thoughtsInput = document.getElementById('thoughts');
+
+            saveButton.addEventListener('click', function () {
+                const thoughts = thoughtsInput.value.trim();
+
+                if (thoughts) {
+                    const title = prompt('Please enter a title for your diary entry:');
+
+                    if (title && title.trim() !== "") {
+                        const entries = JSON.parse(localStorage.getItem('diaryEntries')) || {};
+                        entries[formattedDate] = { title: title, content: thoughts };
+                        localStorage.setItem('diaryEntries', JSON.stringify(entries));
+
+                        // After saving the entry, redirect to home.html
+                        window.location.href = 'home.html';
+                    } else {
+                        alert('Please provide a valid title.');
+                    }
+                } else {
+                    alert('Please enter your thoughts or happenings.');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
