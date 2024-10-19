@@ -1,35 +1,47 @@
-.container{
-    vertical-align: top;
-    display: inline-block;
-    margin-top: 80px;
-    background-color: white;
-    width: 450px;
-    height: 540px;
-    padding-left: 47px;
-    padding-top: 40px;
-}
 main {
     display: flex;
-    flex-direction: row; /* Stack the divs vertically */
+    flex-direction: row;
+    justify-content: center;
     align-items: center;
-    gap: 80px; /* Add gap between the two divs */
+    gap: 60px;
 }
-body{
+
+.container {
     display: flex;
-    flex: row;
- background-image: url(bg2.jpg);
- justify-content: center;
- align-items: center;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 33%;
+    background-color: white;
+    padding-top: 3%;
+    padding-left: 2%;
+    padding-right: 2%;
+    padding-bottom: 3%;
+}
+
+img {
+    width: 90%;
+    height: auto;
+    margin-bottom: 10px;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url(bg2.jpg);
+    min-height: 98vh;
+    flex-wrap: wrap;
+}
+
+a {
+    color: rgb(0, 124, 255);
+    text-decoration: none;
+    text-align: center;
+}
+a:hover{
+    color: rgb(0, 0, 0);
 }
 h2{
-    margin-left: 160px;
-}
-a{
-    text-decoration: none;
-    color: rgb(178, 131, 131);
-}
-a:active{
-    color: blue;
-}
-a:hover{color: black;
+    font-size: 33px;
 }
