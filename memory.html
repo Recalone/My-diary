@@ -178,17 +178,23 @@
                 }
             });
 
-            // Display all entry with there titles only
-            const entries = JSON.parse(localStorage.getItem('diaryEntries')) || {};
-            for (const date in entries) {
-                const entryElement = document.createElement('p');
-                entryElement.textContent = `${new Date(date).toLocaleDateString()}: ${entries[date].title}`;
-                entryElement.addEventListener('click', function () {
-                    alert(`Title: ${entries[date].title}\nContent: ${entries[date].content}`);
-                });
-                allEntriesContainer.appendChild(entryElement);
+           // Display all entry with their titles only
+const entries = JSON.parse(localStorage.getItem('diaryEntries')) || {};
+for (const date in entries) {
+    const entryElement = document.createElement('p');
+    entryElement.textContent = `${new Date(date).toLocaleDateString()}: ${entries[date].title}`;
+    
+    // Modify the click event to open a new tab
+    entryElement.addEventListener('click', function () {
+        // Open entry.html in a new tab with the date as a query parameter
+        window.open(`entry.html?date=${encodeURIComponent(date)}`, '_blank');
+    });
+    
+    allEntriesContainer.appendChild(entryElement);
+}
+
             }
-        });
+        );
     </script>
 
 </body>
