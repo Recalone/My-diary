@@ -1,0 +1,35 @@
+body {
+    background-image: url(bg.png);
+}
+
+.cover {
+    width: 650px;
+    height: 450px;
+    margin-top: 10%;
+    background-image: url(main.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+    margin-left: 33%;
+}
+
+.place {
+    padding-left: 30%;
+}
+
+input {
+    margin-top: 26px;                   /* Margin at the top */
+    margin-bottom: 26px;                /* Margin at the bottom */
+    border: none;                       /* Remove all borders */
+    /* border-bottom: 2px solid #000;     Add a bottom border to create a line effect */
+    background: transparent;            /* Make the background transparent */
+    width: 100%;                        /* Use full width for input */
+    padding: 5px;                       /* Optional: add padding for better spacing */
+    font-size: 1em;                     /* Adjust font size as needed */
+    outline: none;                      /* Remove outline on focus */
+    color: #000;                        /* Set text color to black for visibility */
+}
+
+label {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    margin-right: 10px;
+}

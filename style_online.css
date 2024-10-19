@@ -1,0 +1,112 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f3f3f3;
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.duck-container {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    animation: walk 10s linear infinite; /* General walking animation */
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.duck {
+    width: 50px;
+}
+
+.message {
+    font-size: 20px;
+    color: #333;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+/* Walking animation: From right to left */
+@keyframes walk {
+    0% {
+        left: 100%; /* Start off the right side of the screen */
+    }
+    5% {
+        left: 85%; /* Enter the left gate */
+    }
+    15% {
+        left: 75%; /* Inside the gate */
+    }
+    25% {
+        left: 70%; /* Stay inside the gate briefly */
+    }
+    35% {
+        left: 75%; /* Exiting the gate */
+    }
+    90% {
+        left: 85%; /* Position after exiting */
+    }
+    100% {
+        left: 100%; /* Exit off the screen */
+    }
+}
+
+/* Gate styles */
+.gate {
+    position: absolute;
+    top: 50%;
+    width: 40px; /* Width of the gate */
+    height: 100px; /* Height of the gate */
+    background-color: #654321; /* Gate color */
+    transform: translateY(-50%);
+    transition: width 0.5s; /* Smooth transition for opening and closing */
+    border: 3px solid #333; /* Gate border */
+}
+
+/* Left gate */
+.left-gate {
+    left: 0;
+    transform-origin: left; /* Set transform origin to left */
+    animation: gatesAnimation 10s linear infinite; /* Animation for left gate */
+}
+
+/* Right gate */
+.right-gate {
+    right: 0;
+    transform-origin: right; /* Set transform origin to right */
+    animation: gatesAnimation 10s linear infinite; /* Animation for right gate */
+}
+
+/* Keyframes for gate animation */
+@keyframes gatesAnimation {
+    0%, 5% {
+        width: 0; /* Gates are closed */
+    }
+    5%, 15% {
+        width: 40px; /* Open left gate when duck enters */
+    }
+    15%, 25% {
+        width: 40px; /* Left gate stays open */
+    }
+    25%, 35% {
+        width: 0; /* Close left gate after duck exits */
+    }
+    90%, 100% {
+        width: 0; /* Gates remain closed while the duck is outside */
+    }
+}

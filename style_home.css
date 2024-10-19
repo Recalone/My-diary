@@ -1,0 +1,27 @@
+.container{
+    vertical-align: top;
+    display: inline-block;
+    margin-top: 80px;
+    background-color: white;
+    width: 450px;
+    height: 540px;
+    padding-left: 47px;
+    padding-top: 40px;
+    margin-left: 100px;
+}
+.space{margin-left: 200px;}
+body{
+ background-image: url(bg2.jpg);
+}
+h2{
+    margin-left: 160px;
+}
+a{
+    text-decoration: none;
+    color: rgb(178, 131, 131);
+}
+a:active{
+    color: blue;
+}
+a:hover{color: black;
+}

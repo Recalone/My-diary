@@ -1,0 +1,135 @@
+body{
+    background-image: url(bg1.jpg);
+}
+.password{
+    display: inline-block;
+ }
+.password input{
+    padding: 5px 10px;
+    outline: none;
+    border: 0;
+}
+.icon{
+   position: absolute;
+    cursor: pointer;
+    padding-top: 24px; 
+    margin-left: -1px;
+}
+.cover{
+    width: 650px;
+    height: 450px;
+    margin-top:8%;
+    background-image:url(main1.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+    margin-left: 32%;
+}
+.place{
+    padding-left: 30%;
+    }
+img:hover{
+    scale: 1.1;
+}
+input:hover{
+    scale:1.1;
+}
+input{
+    border: none;
+    /* border-bottom: 2px solid #000; */
+    border-radius:5px;
+    background: transparent;
+    width: 100%;
+    padding: 5px;
+    outline: none;
+    color: #020202;
+    margin-top: 19px;
+    margin-bottom: 52px;
+    border-radius: px;
+    margin-left: 50px;
+    width: 75px;
+    color: black;
+}
+#space{
+    margin-left:px;
+    margin-top:-79px;
+    color: transparent;
+    background: #e0ddd9;
+    -webkit-background-clip: text;
+    background-clip: text;
+    text-shadow: 
+    -2px 6px 6px rgb(0, 0, 0, 0.1);
+    transform: translate(17%, 13%);
+}
+p{
+    margin-top: -9px;
+    margin-bottom:80px;
+    /* margin-left:75px; */
+    font-family: cursive;
+    font-style: oblique;
+    font-weight: 600;
+    font-size: 19px;
+    color: transparent;
+    background: #cbac99;
+    -webkit-background-clip: text;
+    background-clip: text;
+    text-shadow: 
+    -2px 6px 6px rgb(0, 0, 0, 0.1);
+    transform: translate(18%, 13%);
+}
+label{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    margin-right: 10px;
+    color: transparent; /* Make text color transparent for background clip */
+    background: #c9ab95; /* Background for the clipping */
+    -webkit-background-clip: text; /* Clip the background to text */
+    background-clip: text; /* For non-webkit browsers */
+    text-shadow: 
+        -2px 6px 6px rgba(255, 255, 255, 0.4); /* Inner shadow effect */
+    font-family: cursive;
+    font-size: larger;
+}
+.r{
+    color: transparent; 
+    background:#e0ddd9;
+    -webkit-background-clip: text;
+    background-clip: text;
+    text-shadow: -2px 6px 6px rgba(0, 0, 0, 0);
+    margin-right: 25px;
+    width: 4px;
+    }
+button:hover{
+    scale:1.3;
+}
+button{
+padding-top: 3px;
+padding-bottom:4px;
+margin-top: 100px;
+margin-left:98px;
+background-color: transparent;
+border-radius: 6px;
+background-color: rgb(255, 222, 228);
+}
+.space{
+margin-bottom: -6px;
+margin-right: 8px;
+margin-left: -6px;}
+h1{
+    font-family: Arial, Helvetica, sans-serif;
+    margin-left: 375px;
+    margin-right:auto;
+    color: #c9ab95;
+    padding: 14px;
+    font-size: 35px;
+    color: transparent;
+    background: #c9ab95;
+    -webkit-background-clip: text;
+    background-clip: text;
+    text-shadow: 
+    -2px 6px 6px rgba(255, 255, 255, 0.4);
+    transform: translate(-50%, -1%);
+    
+}
+.name{
+    margin-left:95px;
+    font-size: small;
+}
