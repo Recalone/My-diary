@@ -26,6 +26,7 @@
         }
 
         .date {
+            font-family: 'Courier New', Courier, monospace;
             text-align: center;
             font-size: 1.2em;
             color: #6b6b6b;
@@ -34,13 +35,16 @@
 
         input[type="date"], input[type="text"] {
             width: 100%;
-            font-size: 16px;
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 19px;
             margin-bottom: 20px;
             border: 1px solid #ccc;
             border-radius: 4px;
+            height: 2.3em;
         }
 
         textarea {
+            margin-top: 3vh;
             width: 100%;
             height: 200px;
             border: 1px solid #ccc;
@@ -71,6 +75,7 @@
         }
 
         .entry {
+            margin-top: 2vh;
             background-color: #e7f7e6;
             padding: 15px;
             border-left: 4px solid #4caf50;
@@ -103,7 +108,7 @@
 
     <div class="container">
         <h1>Search Diary Entries</h1>
-        <p class="date">Enter a date to search for your diary entry:</p>
+        <p class="date">All memories are here you just need to write/find them:</p>
         
         <input type="date" id="entry-date" max="" />
         <button id="search-button">Search Entry</button>
@@ -113,7 +118,7 @@
             <p id="diary-entry"></p>
         </div>
 
-        <input type="text" id="entry-title" placeholder="Enter entry title" style="display: none;" />
+        <input type="text" id="entry-title" placeholder="Enter entry title" style="display: none;margin-top: 3vh;" />
         <textarea id="new-entry" placeholder="No entry found. Write a new entry here..."></textarea>
         <button id="save-new-entry" style="display: none;">Save New Entry</button>
     </div>
