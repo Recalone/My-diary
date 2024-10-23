@@ -15,47 +15,23 @@
     </style>
 </head>
 <body>
+    <script src="script.js"></script>
     <div class="cover">
         <h1>My Diary</h1>
         <main>
             <form id="diary-form" action="home.html" class="place">
                 <label for="name">Name</label>
-                <input type="text" name="name" id="name" class="name" placeholder="Your Name" oninput="checkForm()"><br>
+                <input type="text" name="name" id="name" class="name" placeholder="Your Name" oninput="checkForm()" required><br>
                 <p>Live, laugh,</p>
                 <p id="space">love, repeat</p>
                 <label for="password" class="r">MyName</label>
                 <div class="password">
-                    <input type="password" name="password" id="password" placeholder="password" oninput="checkForm()">
+                    <input type="password" name="password" id="password" placeholder="password" oninput="checkForm()" required>
                     <img src="hide.png" width="16px" alt="visible" onclick="pass()" class="icon" id="icon">
                 </div><br>
                 <button type="submit" id="submit-btn" disabled><img src="pen.png" alt="pen" width="30px" class="space">Write</button>
             </form>
         </main>
     </div>
-    <script>
-        function checkForm() {
-            const nameInput = document.getElementById('name').value.trim();
-            const passwordInput = document.getElementById('password').value.trim();
-            const submitBtn = document.getElementById('submit-btn');
-
-            if (nameInput !== '' && passwordInput !== '') {
-                submitBtn.disabled = false;
-            } else {
-                submitBtn.disabled = true;
-            }
-        }
-
-        function pass() {
-            const passwordField = document.getElementById('password');
-            const icon = document.getElementById('icon');
-            if (passwordField.type === 'password') {
-                passwordField.type = 'text';
-                icon.src = 'eye.png';
-            } else {
-                passwordField.type = 'password';
-                icon.src = 'hide.png';
-            }
-        }
-    </script>
 </body>
 </html>
