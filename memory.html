@@ -14,7 +14,7 @@
         .container {
             max-width: 600px;
             margin: 0 auto;
-            background-color: white;
+            background-color: #ffffff;
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -41,6 +41,7 @@
             border: 1px solid #ccc;
             border-radius: 4px;
             height: 2.3em;
+            outline: none;
         }
 
         textarea {
@@ -114,11 +115,11 @@
         <button id="search-button">Search Entry</button>
 
         <div id="entry-output" class="entry" style="display: none;">
-            <h2>Diary Entry for <span id="search-date"></span>:</h2>
+            <h2><span id="search-date"></span>:</h2>
             <p id="diary-entry"></p>
         </div>
 
-        <input type="text" id="entry-title" placeholder="Enter entry title" style="display: none;margin-top: 3vh;" />
+        <input type="text" id="entry-title" placeholder="Enter entry title" style="display: none;margin-top: 3vh; outline: none;" />
         <textarea id="new-entry" placeholder="No entry found. Write a new entry here..."></textarea>
         <button id="save-new-entry" style="display: none;">Save New Entry</button>
     </div>
@@ -129,77 +130,67 @@
     </div>
 
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const searchButton = document.getElementById('search-button');
-            const entryDateInput = document.getElementById('entry-date');
-            const entryOutput = document.getElementById('entry-output');
-            const newEntryTextarea = document.getElementById('new-entry');
-            const saveNewEntryButton = document.getElementById('save-new-entry');
-            const searchDateSpan = document.getElementById('search-date');
-            const diaryEntryParagraph = document.getElementById('diary-entry');
-            const entryTitleInput = document.getElementById('entry-title');
-            const allEntriesContainer = document.getElementById('all-entries-container');
+        document.addEventListener("DOMContentLoaded", () => {
+    const searchButton = document.getElementById('search-button');
+    const entryDateInput = document.getElementById('entry-date');
+    const entryOutput = document.getElementById('entry-output');
+    const newEntryTextarea = document.getElementById('new-entry');
+    const saveNewEntryButton = document.getElementById('save-new-entry');
+    const searchDateSpan = document.getElementById('search-date');
+    const diaryEntryParagraph = document.getElementById('diary-entry');
+    const entryTitleInput = document.getElementById('entry-title');
+    const allEntriesContainer = document.getElementById('all-entries-container');
 
-            const today = new Date().toISOString().split('T')[0];
-            entryDateInput.setAttribute('max', today);
+    const today = new Date().toISOString().split('T')[0];
+    entryDateInput.max = today;
 
-            searchButton.addEventListener('click', function () {
-                const searchDate = entryDateInput.value;
-                if (!searchDate) {
-                    alert('Please enter a valid date.');
-                    return;
-                }
+    const loadEntries = () => JSON.parse(localStorage.getItem('diaryEntries')) || {};
 
-                const entries = JSON.parse(localStorage.getItem('diaryEntries')) || {};
-
-                if (entries[searchDate]) {
-                    entryOutput.style.display = 'block';
-                    newEntryTextarea.style.display = 'none';
-                    entryTitleInput.style.display = 'none';
-                    saveNewEntryButton.style.display = 'none';
-                    searchDateSpan.textContent = new Date(searchDate).toLocaleDateString();
-                    diaryEntryParagraph.textContent = entries[searchDate].content;
-                } else {
-                    entryOutput.style.display = 'none';
-                    newEntryTextarea.style.display = 'block';
-                    entryTitleInput.style.display = 'block';
-                    saveNewEntryButton.style.display = 'block';
-                }
-            });
-
-            saveNewEntryButton.addEventListener('click', function () {
-                const newEntry = newEntryTextarea.value.trim();
-                const entryTitle = entryTitleInput.value.trim();
-                const searchDate = entryDateInput.value;
-
-                if (newEntry && entryTitle) {
-                    const entries = JSON.parse(localStorage.getItem('diaryEntries')) || {};
-                    entries[searchDate] = { title: entryTitle, content: newEntry };
-                    localStorage.setItem('diaryEntries', JSON.stringify(entries));
-                    alert('New entry saved successfully!');
-                    window.location.reload();
-                } else {
-                    alert('Please enter both a title and your diary entry.');
-                }
-            });
-
-           // Display all entry with their titles only
-const entries = JSON.parse(localStorage.getItem('diaryEntries')) || {};
-for (const date in entries) {
-    const entryElement = document.createElement('p');
-    entryElement.textContent = `${new Date(date).toLocaleDateString()}: ${entries[date].title}`;
-    
-    // Modify the click event to open a new tab
-    entryElement.addEventListener('click', function () {
-        // Open entry.html in a new tab with the date as a query parameter
-        window.open(`entry.html?date=${encodeURIComponent(date)}`, '_blank');
+    searchButton.addEventListener('click', () => {
+        const searchDate = entryDateInput.value;
+        if (!searchDate) return alert('Please enter a valid date.');
+        
+        const entries = loadEntries();
+        const entry = entries[searchDate];
+        
+        if (entry) {
+            entryOutput.style.display = 'block';
+            newEntryTextarea.style.display = saveNewEntryButton.style.display = entryTitleInput.style.display = 'none';
+            searchDateSpan.textContent = new Date(searchDate).toLocaleDateString();
+            diaryEntryParagraph.textContent = entry.content;
+        } else {
+            entryOutput.style.display = 'none';
+            newEntryTextarea.style.display = entryTitleInput.style.display = saveNewEntryButton.style.display = 'block';
+        }
     });
-    
-    allEntriesContainer.appendChild(entryElement);
-}
 
-            }
-        );
+    saveNewEntryButton.addEventListener('click', () => {
+        const newEntry = newEntryTextarea.value.trim();
+        const entryTitle = entryTitleInput.value.trim();
+        const searchDate = entryDateInput.value;
+
+        if (newEntry && entryTitle) {
+            const entries = loadEntries();
+            entries[searchDate] = { title: entryTitle, content: newEntry };
+            localStorage.setItem('diaryEntries', JSON.stringify(entries));
+            alert('New entry saved successfully!');
+            location.reload();
+        } else {
+            alert('Please enter both a title and your diary entry.');
+        }
+    });
+
+    const entries = loadEntries();
+    Object.keys(entries).forEach(date => {
+        const entryElement = document.createElement('p');
+        entryElement.textContent = `${new Date(date).toLocaleDateString()}: ${entries[date].title}`;
+        entryElement.addEventListener('click', () => {
+            window.open(`entry.html?date=${encodeURIComponent(date)}`, '_blank');
+        });
+        allEntriesContainer.appendChild(entryElement);
+    });
+});
+
     </script>
 
 </body>
